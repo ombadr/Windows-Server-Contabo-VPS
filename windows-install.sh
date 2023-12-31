@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt update && apt upgrade
+apt update -y && apt upgrade -y
 
 apt install filezilla grub2 wimtools -y
 
