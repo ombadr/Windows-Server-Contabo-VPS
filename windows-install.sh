@@ -14,7 +14,13 @@ parted /dev/sda --script -- mk part primary 1MB $(($part_size))MB
 
 parted /dev/sda --script -- mk part primary $(($part_size + 1))MB $(($part_size * 2))MB
 
-gdisk /dev/sda
+gdisk /dev/sda <<EOF
+r
+g
+p
+w
+Y
+EOF
 
 mount /dev/sda1 /mnt
 
