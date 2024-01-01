@@ -21,6 +21,8 @@ parted /dev/sda --script -- mkpart primary ntfs ${part_size_mb}MB $((2 * part_si
 #Inform kernel of partition table changes
 partprobe /dev/sda
 
+sleep 10
+
 #Format the partitions
 mkfs.ntfs -f /dev/sda1
 mkfs.ntfs -f /dev/sda2
