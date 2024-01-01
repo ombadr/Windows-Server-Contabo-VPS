@@ -4,21 +4,31 @@ apt update -y && apt upgrade -y
 
 apt install filezilla grub2 wimtools ntfs-3g -y
 
+#Get the disk size in GB and convert to MB
+
+disk_size_gb = $(parted /dev/sda --script print | awk '/^Disk \/dev\/sda:/ {print int($3)}')
+size_size_mb = $((disk_size_gb * 1024))
+
+#Calculate partition size (25% of total size)
+part_size_mb = $((disk_size_mb / 4))
+
+#Create GPT partition table
 parted /dev/sda --script -- mklabel gpt
 
-disk_size=$(parted /dev/sda --script print | awk '/^Disk \/dev\/sda:/ {print int($3)}')
+#Create two partitions
+parted /dev/sda --script -- mkpart primary ntfs 1MB ${part_size_mb}MB
+parted /dev/sda --script -- mkpart primary ntfs ${part_size_mb}MB $((2 * part_size_mb))MB
 
-part_size=$((disk_size / 4))
+#Inform kernel of partition table changes
+partprobe /dev/sda
 
-parted /dev/sda --script -- mkpart primary 1MB "${part_size}"MB
-
-parted /dev/sda --script -- mkpart primary "$(($part_size + 1))MB" "$(($part_size * 2))MB"
-
-echo -e "r\ng\np\nw\nY\n" | gdisk /dev/sda
-
-#Create NTFS filesystems on both partitions
+#Format the partitions
 mkfs.ntfs -f /dev/sda1
 mkfs.ntfs -f /dev/sda2
+
+echo "NTFS partitions created"
+
+echo -e "r\ng\np\nw\nY\n" | gdisk /dev/sda
 
 mount /dev/sda1 /mnt
 
