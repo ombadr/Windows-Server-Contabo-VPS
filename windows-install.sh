@@ -2,7 +2,7 @@
 
 apt update -y && apt upgrade -y
 
-apt install filezilla grub2 wimtools -y
+apt install filezilla grub2 wimtools ntfs-3g -y
 
 parted /dev/sda --script -- mklabel gpt
 
@@ -20,11 +20,13 @@ echo -e "r\ng\np\nw\nY\n" | gdisk /dev/sda
 mkfs.ntfs -f /dev/sda1
 mkfs.ntfs -f /dev/sda2
 
-mount -t ntfs-3g /dev/sda1 /mnt
+mount /dev/sda1 /mnt
 
 #Prepare directory for the Windows disk
-mkdir ~/windisk
-mount -t ntfs-3g /dev/sda2 ~/windisk
+cd ~
+mkdir windisk
+
+mount /dev/sda2 windisk
 
 grub-install --root-directory=/mnt /dev/sda
 
