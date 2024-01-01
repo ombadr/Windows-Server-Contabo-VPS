@@ -30,7 +30,7 @@ grub-install --root-directory=/mnt /dev/sda
 
 #Edit GRUB configuration
 cd /mnt/boot/grub
-cat <<EOF > grub.cgf
+cat <<EOF > grub.cfg
 menuentry "windows installer" {
 	insmod ntfs
 	search --set=root --file=/bootmgr
@@ -44,7 +44,7 @@ mkdir winfile
 
 wget -O win10.iso https://shorturl.at/qTUX1
 
-mount -p loop win10.iso winfile
+mount -o loop win10.iso winfile
 
 rsync -avz --progress winfile/* /mnt
 
