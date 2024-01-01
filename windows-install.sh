@@ -6,29 +6,15 @@ apt install filezilla grub2 wimtools -y
 
 parted /dev/sda --script -- mklabel gpt
 
-disk_size=$(parted /dev/sda --script print | awk '/^Disk/ \/dev\/sda:/ {print int($3)}')
+disk_size=$(parted /dev/sda --script print | awk '/^Disk \/dev\/sda:/ {print int($3)}')
 
 part_size=$((disk_size / 4))
-
-parted /dev/sda --script -- mklabel gpt
 
 parted /dev/sda --script -- mkpart primary 1MB "${part_size}"MB
 
 parted /dev/sda --script -- mkpart primary "$(($part_size + 1))MB" "$(($part_size * 2))MB"
 
-gdisk /dev/sda <<EOF
-spawn gdisk /dev/sda
-expect "Command (? for help):"
-send "r\n"
-expect "Recovery/transformation command (? for help):"
-send "g\n"
-expect "MBR command (? for help):"
-send "p\n"
-expect "MBR command (? for help):"
-send "w\n"
-expect "Converted 2 partitions. Finalize and exit? (Y/N):"
-send "Y\n"
-EOF
+echo -e "r\ng\np\nw\nY\n" | gdisk /dev/sda
 
 mount /dev/sda1 /mnt
 
