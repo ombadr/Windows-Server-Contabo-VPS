@@ -17,7 +17,7 @@ parted /dev/sda --script -- mkpart primary 1MB "${part_size}"MB
 parted /dev/sda --script -- mkpart primary "$(($part_size + 1))MB" "$(($part_size * 2))MB"
 
 gdisk /dev/sda <<EOF
-spawn gdisk /dev/sad
+spawn gdisk /dev/sda
 expect "Command (? for help):"
 send "r\n"
 expect "Recovery/transformation command (? for help):"
