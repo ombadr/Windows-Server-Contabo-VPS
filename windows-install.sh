@@ -2,7 +2,7 @@
 
 apt update -y && apt upgrade -y
 
-apt install filezilla grub2 wimtools ntfs-3g -y
+apt install grub2 wimtools ntfs-3g -y
 
 parted /dev/sda --script -- mklabel gpt
 
