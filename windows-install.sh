@@ -16,12 +16,15 @@ parted /dev/sda --script -- mkpart primary "$(($part_size + 1))MB" "$(($part_siz
 
 echo -e "r\ng\np\nw\nY\n" | gdisk /dev/sda
 
-mount /dev/sda1 /mnt
+#Create NTFS filesystems on both partitions
+mkfs.ntfs -f /dev/sda1
+mkfs.ntfs -f /dev/sda2
 
-cd ~
-mkdir windisk
+mount -t ntfs-3g /dev/sda1 /mnt
 
-mount /dev/sda2 windisk
+#Prepare directory for the Windows disk
+mkdir ~/windisk
+mount -t ntfs-3g /dev/sda2 ~/windisk
 
 grub-install --root-directory=/mnt /dev/sda
 
