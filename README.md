@@ -26,10 +26,10 @@ This guide provides step-by-step instructions for installing Windows 10 on a Con
 ### 2. Connect to the VPS via SSH
 
 - Open Terminal on MacOS or PuTTY on Windows.
-- Log in with the command ssh `root@<MACHINE-IP>` and enter your Rescue System password.
+- Log in with the command `ssh root@<MACHINE-IP>` and enter your Rescue System password.
 - Execute the following commands:
   - `apt install git -y`
-  - `git clone https://github.com/ombadr/contabo-windows-install.git`
+  - `git clone https://github.com/ombadr/Windows10-Contabo-VPS.git`
   - `cd contabo-windows-install`
   - `chmod +x windows-install.sh`
   - `./windows-install.sh`
