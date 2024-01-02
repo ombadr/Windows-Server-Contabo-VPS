@@ -6,7 +6,7 @@ This guide provides step-by-step instructions for installing Windows 10 on a Con
 
 ## Prerequisites
 
-- VNC Viewer application installed. You can download from [here](https://www.realvnc.com/en/connect/download/viewer/).
+- VNC Viewer application installed. Download it from [here](https://www.realvnc.com/en/connect/download/viewer/).
 - A Contabo VPS
 - Microsoft Remote Desktop for RDP connection to the machine.
 
