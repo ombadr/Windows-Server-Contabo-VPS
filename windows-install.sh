@@ -63,7 +63,7 @@ EOF
 cd /root/windisk
 mkdir winfile
 
-wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1mFQ0KZAz2h_DFUlgYNWmfkcOD_mLjB4F' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1mFQ0KZAz2h_DFUlgYNWmfkcOD_mLjB4F" -O win10.iso && rm -rf /tmp/cookies.txt
+curl "https://drive.usercontent.google.com/download?id=1mFQ0KZAz2h_DFUlgYNWmfkcOD_mLjB4F&confirm=xxx" -o win10.iso
 
 mount -o loop win10.iso winfile
 
