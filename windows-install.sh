@@ -61,9 +61,10 @@ menuentry "windows installer" {
 EOF
 
 cd /root/windisk
+
 mkdir winfile
 
-curl "https://drive.usercontent.google.com/download?id=1mFQ0KZAz2h_DFUlgYNWmfkcOD_mLjB4F&confirm=xxx" -o win10.iso
+wget -O win10.iso --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" https://t.ly/swrq1
 
 mount -o loop win10.iso winfile
 
